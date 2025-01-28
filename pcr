@@ -15,6 +15,6 @@ class Receita:
 
 minha_receita = Receita()
 
-minha_receita.adicionar_dinheiro(-5)
+minha_receita.adicionar_dinheiro(50)
 minha_receita.verificar_saldo()
 
