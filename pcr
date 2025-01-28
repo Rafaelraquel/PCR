@@ -1,1 +1,20 @@
+class Receita:
+    def __init__(self):
+        self.saldo = 0.0
+
+    def adicionar_dinheiro(self, valor):
+        if valor > 0:
+            self.saldo += valor
+            print(f"Valor de R${valor:.2f} adicionado com sucesso.")
+        else:
+            print("O valor deve ser maior que zero.")
+
+    def verificar_saldo(self):
+        print(f"Saldo atual: R${self.saldo:.2f}")
+
+
+minha_receita = Receita()
+
+minha_receita.adicionar_dinheiro(-5)
+minha_receita.verificar_saldo()
 
