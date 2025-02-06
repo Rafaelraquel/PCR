@@ -1,0 +1,40 @@
+class Receita:
+    
+    def __init__(self):
+        self.saldo = 0.0
+        self.historico_transferencias = []  
+
+    def adicionar_dinheiro (self, valor):
+        if valor > 0:
+            self.saldo += valor
+            print (f"O valor de R${valor:.2f} adicionado com sucesso.")
+        else:
+            print ("O valor inserido deve ser maior que zero.")
+
+    def verificar_saldo (self):
+        print (f"Saldo atual: R${self.saldo:.2f}")
+
+    def transferir_dinheiro (self, valor, destino):
+        if valor > 0 and valor <= self.saldo:
+            self.saldo -= valor
+            self.historico_transferencias.append ({"valor": valor, "destino": destino})
+            print (f"Transferência de R${valor:.2f} realizada para {destino}.")
+        elif valor > self.saldo:
+            print ("Saldo insuficiente para a transferência.")
+        else:
+            print ("O valor deve ser maior que zero.")
+
+    def exibir_transferencias (self):
+        if not self.historico_transferencias:
+            print ("Nenhuma transferência registrada.")
+        else:
+            print ("Histórico de Transferências:")
+            for transferencia in self.historico_transferencias:
+                print (f"- R${transferencia['valor']:.2f} para {transferencia['destino']}")
+
+minha_receita = Receita()
+minha_receita.adicionar_dinheiro(200)
+minha_receita.transferir_dinheiro(50, "Conta Poupança")
+minha_receita.transferir_dinheiro(30, "Cartão de Crédito")
+minha_receita.verificar_saldo()
+minha_receita.exibir_transferencias()
