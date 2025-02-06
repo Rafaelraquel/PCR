@@ -13,8 +13,73 @@ class Receita:
         print(f"Saldo atual: R${self.saldo:.2f}")
 
 
-minha_receita = Receita()
+class Alimentacao(Receita):
+    def __init__(self):
+        super().__init__()
+        self.categoria = "Alimentação"
 
-minha_receita.adicionar_dinheiro(50)
-minha_receita.verificar_saldo()
+    def verificar_saldo(self):
+        print(f"Saldo atual em {self.categoria}: R${self.saldo:.2f}")
 
+
+class Saude(Receita):
+    def __init__(self):
+        super().__init__()
+        self.categoria = "Saúde"
+
+    def verificar_saldo(self):
+        print(f"Saldo atual em {self.categoria}: R${self.saldo:.2f}")
+
+
+class Lazer(Receita):
+    def __init__(self):
+        super().__init__()
+        self.categoria = "Lazer"
+
+    def verificar_saldo(self):
+        print(f"Saldo atual em {self.categoria}: R${self.saldo:.2f}")
+
+
+class Reserva(Receita):
+    def __init__(self):
+        super().__init__()
+        self.categoria = "Reserva"
+
+    def verificar_saldo(self):
+        print(f"Saldo atual em {self.categoria}: R${self.saldo:.2f}")
+
+
+class Totalizador:
+    def __init__(self):
+        self.categorias = []
+
+    def adicionar_categoria(self, categoria):
+        self.categorias.append(categoria)
+
+    def calcular_total(self):
+        total = sum(categoria.saldo for categoria in self.categorias)
+        print(f"Saldo total de todas as categorias: R${total:.2f}")
+
+
+alimentacao = Alimentacao()
+saude = Saude()
+lazer = Lazer()
+reserva = Reserva()
+
+alimentacao.adicionar_dinheiro(100)
+saude.adicionar_dinheiro(200)
+lazer.adicionar_dinheiro(50)
+reserva.adicionar_dinheiro(300)
+
+alimentacao.verificar_saldo()
+saude.verificar_saldo()
+lazer.verificar_saldo()
+reserva.verificar_saldo()
+
+totalizador = Totalizador()
+totalizador.adicionar_categoria(alimentacao)
+totalizador.adicionar_categoria(saude)
+totalizador.adicionar_categoria(lazer)
+totalizador.adicionar_categoria(reserva)
+
+totalizador.calcular_total()
