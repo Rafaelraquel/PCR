@@ -1,11 +1,15 @@
 class Receita:
-    def __init__(self):
+    def __init__(self, limite=float('inf')):
         self.saldo = 0.0
+        self.limite = limite
 
     def adicionar_dinheiro(self, valor):
         if valor > 0:
-            self.saldo += valor
-            print(f"Valor de R${valor:.2f} adicionado com sucesso.")
+            if self.saldo + valor <= self.limite:
+                self.saldo += valor
+                print(f"Valor de R${valor:.2f} adicionado com sucesso.")
+            else:
+                print(f"Erro: O valor de R${valor:.2f} excede o limite de R${self.limite:.2f} para esta categoria.")
         else:
             print("O valor deve ser maior que zero.")
 
@@ -14,8 +18,8 @@ class Receita:
 
 
 class Alimentacao(Receita):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, limite=float('inf')):
+        super().__init__(limite)
         self.categoria = "Alimentação"
 
     def verificar_saldo(self):
@@ -23,8 +27,8 @@ class Alimentacao(Receita):
 
 
 class Saude(Receita):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, limite=float('inf')):
+        super().__init__(limite)
         self.categoria = "Saúde"
 
     def verificar_saldo(self):
@@ -32,8 +36,8 @@ class Saude(Receita):
 
 
 class Lazer(Receita):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, limite=float('inf')):
+        super().__init__(limite)
         self.categoria = "Lazer"
 
     def verificar_saldo(self):
@@ -41,8 +45,8 @@ class Lazer(Receita):
 
 
 class Reserva(Receita):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, limite=float('inf')):
+        super().__init__(limite)
         self.categoria = "Reserva"
 
     def verificar_saldo(self):
@@ -61,21 +65,28 @@ class Totalizador:
         print(f"Saldo total de todas as categorias: R${total:.2f}")
 
 
-alimentacao = Alimentacao()
-saude = Saude()
-lazer = Lazer()
-reserva = Reserva()
+# Definindo limites de orçamento para cada categoria
+alimentacao = Alimentacao(limite=150)
+saude = Saude(limite=250)
+lazer = Lazer(limite=100)
+reserva = Reserva(limite=500)
 
+# Adicionando valores às categorias
 alimentacao.adicionar_dinheiro(100)
 saude.adicionar_dinheiro(200)
 lazer.adicionar_dinheiro(50)
 reserva.adicionar_dinheiro(300)
 
+# Tentando adicionar um valor que excede o limite
+alimentacao.adicionar_dinheiro(60)  # Isso deve falhar, pois excede o limite de 150
+
+# Verificando saldos
 alimentacao.verificar_saldo()
 saude.verificar_saldo()
 lazer.verificar_saldo()
 reserva.verificar_saldo()
 
+# Calculando o total
 totalizador = Totalizador()
 totalizador.adicionar_categoria(alimentacao)
 totalizador.adicionar_categoria(saude)
